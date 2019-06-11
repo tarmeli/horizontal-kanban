@@ -1,0 +1,124 @@
+.task {
+  margin: 5px 5px 5px 5px; 
+  border-radius: 5px;
+  padding: 0 10px;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  box-shadow: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+
+  &:last-child {
+    margin-right: 5px;
+  }
+
+  &__title {
+    display: flex;
+    background: #eee;
+    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 8px;
+    border-radius: 5px 5px 0 0;
+    margin: -1px -10px 0 -11px;
+    border-top: solid 1px #dbdbdb;
+
+    &[data-priority="0"] {
+      border-left: solid 8px #ffdfdf;
+    }
+    &[data-priority="1"] {
+      border-left: solid 8px #ffaaaa;
+    }
+    &[data-priority="2"] {
+      border-left: solid 8px #ff7d7d;
+    }
+    &[data-priority="3"] {
+      border-left: solid 8px #f74d4d;
+    }
+    &[data-priority="4"] {
+      border-left: solid 8px #f72828;
+    }
+    &[data-priority="5"] {
+      border-left: solid 8px #e40000;
+    }
+    &[data-priority="6"] {
+      border-left: solid 8px #a00000;
+    }
+    &[data-priority="7"] {
+      border-left: solid 8px #690101;
+    }
+    &[data-priority="8"] {
+      border-left: solid 8px #410000;
+    }
+    &[data-priority="9"] {
+      border-left: solid 8px #2e0000;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex: 1 1 auto;
+    font-size: 0.9rem;
+    padding: 5px;
+    margin: 5px 0 5px 0;
+    line-height: 1.6;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+    border-radius: 0 0 5px 5px;
+    margin: 0 -10px;
+  }
+  
+  &__footer-button {
+    width: 33.33%;
+    text-align: center;
+    cursor: pointer;
+    padding: 2px;
+    outline: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &-group {
+      display: inherit;
+      flex-direction: row;
+    }
+  }
+
+  &__del {
+    color: $white;
+    background-color: $red;
+  }
+
+  &__date {
+    font-size: 9px;
+    text-align: center;
+
+    &--deadline {
+      background-color: $scorpion;
+      color: $white;
+      font-size: 11px;
+      margin: 0 -1px;
+      padding: 10px 0;
+      border-radius: 0 0 5px 5px;
+
+    }
+
+    &--created {
+      color: $link;
+    }
+  }
+}
