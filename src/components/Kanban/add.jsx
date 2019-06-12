@@ -45,6 +45,7 @@ const Add = ({ onSubmitTask }) => (
         type="text"
         name="body"
         id="body"
+        required
       />
       <input className="button button--wide" type="submit" value="Submit" />
 
