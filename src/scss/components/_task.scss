@@ -57,6 +57,38 @@
     &[data-priority="9"] {
       border-left: solid 8px #2e0000;
     }
+
+    &-sub {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      &--left {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      &--center {
+        width: 50%;
+        display: inherit;
+        justify-content: center;
+        text-align: center;
+      }
+
+      &--right {
+        text-align: right;
+        justify-content: flex-end;
+      }
+
+      &--left, &--right {
+        width: 25%;
+        display: inherit;
+        font-size: 12px;
+        margin-top: 15px;
+      }
+    }
   }
 
   &__body {

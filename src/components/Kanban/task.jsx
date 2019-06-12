@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faBug } from '@fortawesome/free-solid-svg-icons';
 
 const Task = ({ data, onTaskMove, onTaskDelete }) => (
   <div className={`task${data.deadline ? '' : ' task--no-deadline'}`} id={data.id}>
     <div className="task__title" data-priority={data.priority}>
       {data.name} - {data.priority}
+          <FontAwesomeIcon icon={faBug} />
 
       <div className="task__date task__date--created">
         Created: {new Date(data.created).toLocaleDateString('fi-FI')}
@@ -31,7 +34,7 @@ const Task = ({ data, onTaskMove, onTaskDelete }) => (
           role="button"
           tabIndex={data.id}
         >
-          Delete
+          <FontAwesomeIcon icon={faTrash} />
         </span>
         <span
           className="task__next task__footer-button"
