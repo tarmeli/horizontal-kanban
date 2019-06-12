@@ -5,14 +5,24 @@ import { faTrash, faBug } from '@fortawesome/free-solid-svg-icons';
 
 const Task = ({ data, onTaskMove, onTaskDelete }) => (
   <div className={`task${data.deadline ? '' : ' task--no-deadline'}`} id={data.id}>
-    <div className="task__title" data-priority={data.priority}>
-      {data.name} - {data.priority}
+    <div className="task__header" data-priority={data.priority}>
+      <div className="task__header-sub">
+        <div className="task__header-sub--left">
+          {data.priority}
+        </div>
+        <div className="task__header-sub--center">
+          {data.name}
+        </div>
+        <div className="task__header-sub--right">
           <FontAwesomeIcon icon={faBug} />
+        </div>
+      </div>
 
       <div className="task__date task__date--created">
-        Created: {new Date(data.created).toLocaleDateString('fi-FI')}
+        {new Date(data.created).toLocaleDateString('fi-FI')}
       </div>
     </div>
+
     <p className="task__body">{data.body}</p>
     <div className="task__footer">
       {
