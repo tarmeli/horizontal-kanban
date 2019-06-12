@@ -15,6 +15,13 @@ const Task = ({ data, onTaskMove, onTaskDelete }) => (
     </div>
     <p className="task__body">{data.body}</p>
     <div className="task__footer">
+      {
+        data.deadline ?
+          <div className="task__date task__date--deadline">
+            DL {new Date(data.deadline).toLocaleDateString('fi-FI')}
+          </div> :
+          null
+      }
       <div className="task__footer-button-group">
         <span
           className="task__prev task__footer-button"
@@ -48,15 +55,6 @@ const Task = ({ data, onTaskMove, onTaskDelete }) => (
           Down
         </span>
       </div>
-
-      {
-        data.deadline ?
-          <div className="task__date task__date--deadline">
-            Deadline: {new Date(data.deadline).toLocaleDateString('fi-FI')}
-          </div> :
-          null
-      }
-
     </div>
   </div>
 );
