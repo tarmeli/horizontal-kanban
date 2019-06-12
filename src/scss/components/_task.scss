@@ -1,11 +1,10 @@
 .task {
-  margin: 5px 5px 5px 5px; 
+  margin: 0 2px 0 2px; 
   border-radius: 5px;
   padding: 0 10px;
   border-color: #dbdbdb;
   border-width: 1px;
   border-style: solid;
-  border-radius: 5px;
   box-shadow: 0;
   display: flex;
   flex-direction: column;
@@ -67,7 +66,8 @@
 
       &--left {
         justify-content: flex-start;
-        text-align: left;
+        align-items: flex-start;
+        text-align: center;
       }
 
       &--center {
@@ -78,8 +78,9 @@
       }
 
       &--right {
-        text-align: right;
         justify-content: flex-end;
+        align-items: flex-end;
+        text-align: center;
       }
 
       &--left, &--right {
@@ -87,6 +88,12 @@
         display: inherit;
         font-size: 12px;
         margin-top: 15px;
+        flex-direction: column;
+        height: 100%;
+
+        &-top {
+          padding: 2px;
+        }
       }
     }
   }
@@ -131,8 +138,8 @@
   }
 
   &__del {
-    color: $white;
-    background-color: $red;
+    color: $red;
+    background-color: $link;
   }
 
   &__date {

@@ -20,12 +20,11 @@
 
   &__title {
     transform: rotate(180deg);
-    text-orientation: sideways-lr;
     writing-mode: vertical-lr;
     font-size: 20px;
     padding: 0.5rem;
     height: 100%;
-    margin-bottom: 0;
+    margin: 0 2px 0 0;
     background: rgba($color: #000000, $alpha: 0.1);
     border-radius: 5px;
     width: 60px;

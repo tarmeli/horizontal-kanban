@@ -8,13 +8,23 @@ const Task = ({ data, onTaskMove, onTaskDelete }) => (
     <div className="task__header" data-priority={data.priority}>
       <div className="task__header-sub">
         <div className="task__header-sub--left">
-          {data.priority}
+          <div className="task__header-sub--left-top">
+            {data.priority}
+          </div>
+          <div className="task__header-sub--left-bottom">
+            <FontAwesomeIcon icon={faBug} />
+          </div>
         </div>
         <div className="task__header-sub--center">
           {data.name}
         </div>
         <div className="task__header-sub--right">
-          <FontAwesomeIcon icon={faBug} />
+          <div className="task__header-sub--right-top">
+            {data.priority}
+          </div>
+          <div className="task__header-sub--right-bottom">
+            <FontAwesomeIcon icon={faBug} />
+          </div>
         </div>
       </div>
 
