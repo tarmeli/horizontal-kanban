@@ -1,27 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { faBug, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faBug } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const Task = ({ data, onTaskMove, onTaskDelete }) => (
-  <div className={`task${data.deadline ? '' : ' task--no-deadline'}`} id={data.id}>
+  <div
+    className={`task${data.deadline ? '' : ' task--no-deadline'}`}
+    id={data.id}
+  >
     <div className="task__header" data-priority={data.priority}>
       <div className="task__header-sub">
         <div className="task__header-sub--left">
           <div className="task__header-sub--left-top">
             {data.priority}
           </div>
+
           <div className="task__header-sub--left-bottom">
             <FontAwesomeIcon icon={faBug} />
           </div>
         </div>
+
         <div className="task__header-sub--center">
           {data.name}
         </div>
+
         <div className="task__header-sub--right">
           <div className="task__header-sub--right-top">
             {data.priority}
           </div>
+
           <div className="task__header-sub--right-bottom">
             <FontAwesomeIcon icon={faBug} />
           </div>
@@ -35,13 +43,11 @@ const Task = ({ data, onTaskMove, onTaskDelete }) => (
 
     <p className="task__body">{data.body}</p>
     <div className="task__footer">
-      {
-        data.deadline ?
-          <div className="task__date task__date--deadline">
+      {data.deadline ? (
+        <div className="task__date task__date--deadline">
             DL {new Date(data.deadline).toLocaleDateString('fi-FI')}
-          </div> :
-          null
-      }
+        </div>
+        ) : null}
       <div className="task__footer-button-group">
         <span
           className="task__prev task__footer-button"

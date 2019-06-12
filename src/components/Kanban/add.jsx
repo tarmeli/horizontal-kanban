@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const Add = ({ onSubmitTask }) => (
   <div className="form">
@@ -47,6 +47,7 @@ const Add = ({ onSubmitTask }) => (
         id="body"
       />
       <input className="button button--wide" type="submit" value="Submit" />
+
       <div className="form__required-text">
         * required field
       </div>

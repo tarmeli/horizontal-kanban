@@ -1,6 +1,6 @@
-import React from 'react';
+import { Content, Nav } from './';
 
-import { Nav, Content } from './';
+import React from 'react';
 
 const App = () => (
   <div className="App">
