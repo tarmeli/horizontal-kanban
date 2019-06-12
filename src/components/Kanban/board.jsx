@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import { Column, boardData } from './';
+
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const Board = ({ data, onTaskMove, onTaskDelete }) => (
   <div className="board">
@@ -14,7 +14,7 @@ const Board = ({ data, onTaskMove, onTaskDelete }) => (
           onTaskDelete={onTaskDelete}
           key={column.id}
         />
-        ))}
+      ))}
     </div>
   </div>
 );

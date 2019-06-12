@@ -1,8 +1,8 @@
+import { Add, Board } from './';
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-import { Board, Add } from './';
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 class Kanban extends Component {
   static propTypes = {

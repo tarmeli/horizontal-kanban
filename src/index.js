@@ -1,10 +1,9 @@
-/* eslint-disable */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import './scss/styles.scss';
 
 import { App } from './components/App';
+import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 ReactDOM.render(
   <BrowserRouter>
