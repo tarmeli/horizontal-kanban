@@ -8,7 +8,7 @@
     flex-direction: row;
     align-items: center;
     height: 250px;
-    margin: 10px;
+    margin: 10px 10px 0 10px;
     padding: 5px;
     border: 1px solid &black;
     border-color: #dbdbdb;
@@ -16,6 +16,7 @@
     border-style: solid;
     border-radius: 5px;
     box-shadow: 0;
+    background-color: #fdfdfd;
   }
 
   &__title {
