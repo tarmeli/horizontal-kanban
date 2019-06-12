@@ -22,7 +22,9 @@ const Task = ({ data, onTaskMove, onTaskDelete }) => (
         </div>
 
         <div className="task__header-sub--center">
-          {data.name}
+          <div className="task__title">
+            {data.name}
+          </div>
         </div>
 
         <div className="task__header-sub--right">
