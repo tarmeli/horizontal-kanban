@@ -89,13 +89,13 @@ class Kanban extends Component {
     const { tasks } = this.state;
 
     return (
-      <React.Fragment>
+      <>
         <Route
           exact
           path="/"
           render={() => (
             <Board
-              data={tasks.sort((a, b) => b.priority - a.priority)}
+              tasks={tasks.sort((a, b) => b.priority - a.priority)}
               onTaskMove={this.handleTaskState}
               onTaskDelete={this.handleTaskDelete}
             />
@@ -105,7 +105,7 @@ class Kanban extends Component {
           path="/Add"
           render={() => <Add onSubmitTask={this.handleSubmitTask} />}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

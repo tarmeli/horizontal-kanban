@@ -1,18 +1,18 @@
-import { Column, boardData } from './';
+import { Row, boardData } from './';
 
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Board = ({ data, onTaskMove, onTaskDelete }) => (
+const Board = ({ tasks, onTaskMove, onTaskDelete }) => (
   <div className="board">
     <div className="board-list">
-      {boardData.map(column => (
-        <Column
-          data={data.filter(task => task.taskState === column.id)}
-          columnTitle={column.title}
+      {boardData.map(row => (
+        <Row
+          tasks={tasks.filter(task => task.taskState === row.id)}
+          rowTitle={row.title}
           onTaskMove={onTaskMove}
           onTaskDelete={onTaskDelete}
-          key={column.id}
+          key={row.id}
         />
       ))}
     </div>
@@ -20,7 +20,7 @@ const Board = ({ data, onTaskMove, onTaskDelete }) => (
 );
 
 Board.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     body: PropTypes.string,

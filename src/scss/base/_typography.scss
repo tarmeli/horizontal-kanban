@@ -72,13 +72,13 @@ h5 {
 }
 
 a {
-  color: $link;
+  color: $mine-shaft;
   outline: 0;
   text-decoration: none;
-  transition: all 0.35s ease-in-out;
+  transition: all 0.05s ease-in-out;
 
   &:hover {
-    color: $yellow;
+    color: $link;
   }
 
   &:hover,

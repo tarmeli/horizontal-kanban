@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Task } from './';
 
-const Column = ({
-  columnTitle, data, onTaskMove, onTaskDelete,
+const Row = ({
+  rowTitle, tasks, onTaskMove, onTaskDelete,
 }) => (
-  <div className="board-list__column">
-    <h2 className="board-list__title">{columnTitle}</h2>
+  <div className="board-list__row">
+    <h2 className="board-list__title">{rowTitle}</h2>
     <div className="board-list__task-view">
-      {data.map(item => (
+      {tasks.map(task => (
         <Task
-          key={item.id}
-          data={item}
+          key={task.id}
+          task={task}
           onTaskMove={onTaskMove}
           onTaskDelete={onTaskDelete}
         />
@@ -20,9 +20,9 @@ const Column = ({
   </div>
 );
 
-Column.propTypes = {
-  columnTitle: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
+Row.propTypes = {
+  rowTitle: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     body: PropTypes.string,
@@ -35,4 +35,4 @@ Column.propTypes = {
   onTaskDelete: PropTypes.func.isRequired,
 };
 
-export { Column };
+export { Row };

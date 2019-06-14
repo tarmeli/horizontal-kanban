@@ -1,94 +1,100 @@
-import { faBug, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBug, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 
-const Task = ({ data, onTaskMove, onTaskDelete }) => (
-  <div
-    className={`task${data.deadline ? '' : ' task--no-deadline'}`}
-    id={data.id}
-  >
-    <div className="task__header" data-priority={data.priority}>
-      <div className="task__header-sub">
-        <div className="task__header-sub--left">
-          <div className="task__header-sub--left-top">
-            {data.priority}
+const Task = ({ task, onTaskMove, onTaskDelete }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div
+      className={`task${task.deadline ? '' : ' task--normal'}${expanded ? ' task--expanded' : ''}`}
+      id={task.id}
+    >
+      <div className="task__header" data-priority={task.priority}>
+        <div className="task__header-sub">
+          <div className="task__header-sub--left">
+            <div className="task__header-sub--left-top">
+              {task.priority}
+            </div>
+
+            <div className="task__header-sub--left-bottom">
+              <FontAwesomeIcon icon={faBug} />
+            </div>
           </div>
 
-          <div className="task__header-sub--left-bottom">
-            <FontAwesomeIcon icon={faBug} />
+          <div className="task__header-sub--center">
+            <div className="task__title">
+              <button onClick={() => setExpanded(!expanded)}>
+                {task.name}
+              </button>
+            </div>
+          </div>
+
+          <div className="task__header-sub--right">
+            <div className="task__header-sub--right-top">
+              {task.priority}
+            </div>
+
+            <div className="task__header-sub--right-bottom">
+              <FontAwesomeIcon icon={faBug} />
+            </div>
           </div>
         </div>
 
-        <div className="task__header-sub--center">
-          <div className="task__title">
-            {data.name}
-          </div>
-        </div>
-
-        <div className="task__header-sub--right">
-          <div className="task__header-sub--right-top">
-            {data.priority}
-          </div>
-
-          <div className="task__header-sub--right-bottom">
-            <FontAwesomeIcon icon={faBug} />
-          </div>
+        <div className="task__date task__date--created">
+          {new Date(task.created).toLocaleDateString('fi-FI')}
         </div>
       </div>
 
-      <div className="task__date task__date--created">
-        {new Date(data.created).toLocaleDateString('fi-FI')}
-      </div>
-    </div>
-
-    <p className="task__body">{data.body}</p>
-    <div className="task__footer">
-      {data.deadline ? (
-        <div className="task__date task__date--deadline">
-            DL {new Date(data.deadline).toLocaleDateString('fi-FI')}
-        </div>
+      <p className="task__body">{task.body}</p>
+      <div className="task__footer">
+        {task.deadline ? (
+          <div className="task__date task__date--deadline">
+            DL {new Date(task.deadline).toLocaleDateString('fi-FI')}
+          </div>
         ) : null}
-      <div className="task__footer-button-group">
-        <span
-          className="task__prev task__footer-button"
-          data-dir="prev"
-          disabled={data.taskState <= 1}
-          onClick={data.taskState <= 1 ? null : onTaskMove}
-          onKeyDown={data.taskState <= 1 ? null : onTaskMove}
-          role="button"
-          tabIndex={data.id}
-        >
-          Up
-        </span>
-        <span
-          className="task__del task__footer-button"
-          onClick={onTaskDelete}
-          onKeyDown={onTaskMove}
-          role="button"
-          tabIndex={data.id}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </span>
-        <span
-          className="task__next task__footer-button"
-          data-dir="next"
-          onClick={data.taskState >= 4 ? null : onTaskMove}
-          disabled={data.taskState >= 4}
-          onKeyDown={data.taskState >= 4 ? null : onTaskMove}
-          role="button"
-          tabIndex={data.id}
-        >
-          Down
-        </span>
+        <div className="task__footer-button-group">
+          <span
+            className="task__prev task__footer-button"
+            data-dir="prev"
+            disabled={task.taskState <= 1}
+            onClick={task.taskState <= 1 ? null : onTaskMove}
+            onKeyDown={task.taskState <= 1 ? null : onTaskMove}
+            role="button"
+            tabIndex={task.id}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+          </span>
+          <span
+            className="task__del task__footer-button"
+            onClick={onTaskDelete}
+            onKeyDown={onTaskMove}
+            role="button"
+            tabIndex={task.id}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </span>
+          <span
+            className="task__next task__footer-button"
+            data-dir="next"
+            onClick={task.taskState >= 4 ? null : onTaskMove}
+            disabled={task.taskState >= 4}
+            onKeyDown={task.taskState >= 4 ? null : onTaskMove}
+            role="button"
+            tabIndex={task.id}
+          >
+            <FontAwesomeIcon icon={faArrowDown} />
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 Task.propTypes = {
-  data: PropTypes.shape({
+  task: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     body: PropTypes.string,
