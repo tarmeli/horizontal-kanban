@@ -10,12 +10,10 @@
     height: 250px;
     margin: 10px 10px 0 10px;
     padding: 5px;
-    border: 1px solid &black;
     border-color: $gray;
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
-    box-shadow: 0;
     background-color: #fdfdfd;
   }
 
@@ -29,8 +27,8 @@
     color: $white;
     background-color: $scorpion;
     border-radius: 5px;
-    width: 60px;
-    min-width: 60px;
+    width: 43px;
+    min-width: 43px;
   }
 
   &__task-view {
@@ -40,5 +38,6 @@
     overflow: auto;
     box-sizing: border-box;
     left: 0;
+    border-radius: 5px;
   }
 }
