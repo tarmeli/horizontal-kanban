@@ -16,18 +16,22 @@
     padding: 10px;
     text-align: center;
     font-size: 20px;
-    color: $white;
-    background-color: $scorpion;
     border-radius: 5px;
-    width: 200px;
+    width: 180px;
     text-transform: uppercase;
     outline: 0;
     cursor: pointer;
+    color: $scorpion;
+    background-color: $link;
+    transition: all;
 
     &:hover {
-      color: $scorpion;
-      background-color: $link;
-      transition: all;
+      color: $white;
+      background-color: $scorpion;
+    }
+
+    &:active {
+      background-color: $mine-shaft;
     }
 
     &--active {
