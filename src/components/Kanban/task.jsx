@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 const Task = ({
-  task, onTaskMove, onTaskDelete,
+  task, onTaskMove, onTaskDelete, amountOfRows,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -14,7 +14,7 @@ const Task = ({
   };
 
   const onNextClick = (e) => {
-    (() => (task.taskState >= 4 ? null : onTaskMove(e)))();
+    (() => (task.taskState >= amountOfRows ? null : onTaskMove(e)))();
   };
 
   return (
@@ -90,7 +90,7 @@ const Task = ({
             className="task__next task__footer-button"
             data-dir="next"
             onClick={onNextClick}
-            disabled={task.taskState >= 4}
+            disabled={task.taskState >= amountOfRows}
             onKeyDown={onNextClick}
             role="button"
             tabIndex={task.id}
@@ -115,6 +115,7 @@ Task.propTypes = {
   }).isRequired,
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
+  amountOfRows: PropTypes.number.isRequired,
 };
 
 export { Task };

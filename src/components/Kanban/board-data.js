@@ -8,12 +8,16 @@ const boardData = [
     id: 2,
   },
   {
-    title: 'pending',
+    title: 'in testing',
     id: 3,
   },
   {
-    title: 'done',
+    title: 'pending',
     id: 4,
+  },
+  {
+    title: 'done',
+    id: 5,
   },
 ];
 

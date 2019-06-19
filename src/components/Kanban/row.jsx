@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Task } from './';
 
 const Row = ({
-  rowTitle, tasks, onTaskMove, onTaskDelete, hasNewTask,
+  rowTitle, tasks, onTaskMove, onTaskDelete, hasNewTask, amountOfRows,
 }) => {
   const [isNewTaskFlashActive, setIsNewTaskFlashActive] = useState(false);
 
@@ -23,6 +23,7 @@ const Row = ({
       <div className="board-list__task-view">
         {tasks.map(task => (
           <Task
+            amountOfRows={amountOfRows}
             key={task.id}
             task={task}
             onTaskMove={onTaskMove}
@@ -48,6 +49,7 @@ Row.propTypes = {
   hasNewTask: PropTypes.bool.isRequired,
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
+  amountOfRows: PropTypes.number.isRequired,
 };
 
 export { Row };

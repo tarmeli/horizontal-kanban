@@ -13,6 +13,7 @@ const Board = ({
           tasks={tasks.filter(task => task.taskState === row.id)}
           rowTitle={row.title}
           onTaskMove={onTaskMove}
+          amountOfRows={boardData.length}
           onTaskDelete={onTaskDelete}
           hasNewTask={rowWithNewTask === row.id}
           key={row.id}
