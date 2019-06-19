@@ -36,7 +36,7 @@ const Add = ({ onSubmitTask }) => (
         onBlur={(e) => {
           e.target.type = 'text';
         }}
-        placeholder="Date"
+        placeholder="Deadline"
       />
 
       <textarea
