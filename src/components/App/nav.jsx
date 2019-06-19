@@ -6,8 +6,8 @@ const Nav = () => {
   const [activeButton, setActiveButton] = useState('tasks');
 
   return (
-    <nav className="navbar">
-      <div className="container">
+    <div className="container container__navbar">
+      <nav className="navbar">
         <Link to="/">
           <NavItem
             title="tasks"
@@ -22,8 +22,8 @@ const Nav = () => {
             handleClick={() => setActiveButton('add')}
           />
         </Link>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 

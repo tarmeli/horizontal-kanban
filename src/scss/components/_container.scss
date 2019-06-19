@@ -1,8 +1,13 @@
 .container {
   justify-content: center;
-  margin: 0 auto;
   width: 100%;
   display: flex;
+
+  &__navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
   &--space-around {
     justify-content: space-around;

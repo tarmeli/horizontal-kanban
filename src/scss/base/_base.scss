@@ -14,6 +14,7 @@
 html {
   @include font-size(17px);
   height: 100%;
+  overflow-y: scroll;
 }
 
 body {
