@@ -4,8 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-const Task = ({ task, onTaskMove, onTaskDelete }) => {
+const Task = ({
+  task, onTaskMove, onTaskDelete,
+}) => {
   const [expanded, setExpanded] = useState(false);
+
+  const onPrevClick = (e) => {
+    (() => (task.taskState <= 1 ? null : onTaskMove(e)))();
+  };
+
+  const onNextClick = (e) => {
+    (() => (task.taskState >= 4 ? null : onTaskMove(e)))();
+  };
 
   return (
     <div
@@ -60,8 +70,8 @@ const Task = ({ task, onTaskMove, onTaskDelete }) => {
             className="task__prev task__footer-button"
             data-dir="prev"
             disabled={task.taskState <= 1}
-            onClick={task.taskState <= 1 ? null : onTaskMove}
-            onKeyDown={task.taskState <= 1 ? null : onTaskMove}
+            onClick={onPrevClick}
+            onKeyDown={onPrevClick}
             role="button"
             tabIndex={task.id}
           >
@@ -79,9 +89,9 @@ const Task = ({ task, onTaskMove, onTaskDelete }) => {
           <span
             className="task__next task__footer-button"
             data-dir="next"
-            onClick={task.taskState >= 4 ? null : onTaskMove}
+            onClick={onNextClick}
             disabled={task.taskState >= 4}
-            onKeyDown={task.taskState >= 4 ? null : onTaskMove}
+            onKeyDown={onNextClick}
             role="button"
             tabIndex={task.id}
           >

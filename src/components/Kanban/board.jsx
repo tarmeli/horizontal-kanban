@@ -3,7 +3,9 @@ import { Row, boardData } from './';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Board = ({ tasks, onTaskMove, onTaskDelete }) => (
+const Board = ({
+  tasks, onTaskMove, onTaskDelete, rowWithNewTask,
+}) => (
   <div className="board">
     <div className="board-list">
       {boardData.map(row => (
@@ -12,6 +14,7 @@ const Board = ({ tasks, onTaskMove, onTaskDelete }) => (
           rowTitle={row.title}
           onTaskMove={onTaskMove}
           onTaskDelete={onTaskDelete}
+          hasNewTask={rowWithNewTask === row.id}
           key={row.id}
         />
       ))}
@@ -29,6 +32,7 @@ Board.propTypes = {
     created: PropTypes.string.isRequired,
     deadline: PropTypes.string,
   })).isRequired,
+  rowWithNewTask: PropTypes.number.isRequired,
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
 };

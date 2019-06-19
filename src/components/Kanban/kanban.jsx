@@ -20,10 +20,16 @@ class Kanban extends Component {
       cachedState != null &&
       cachedState.length > 0
     ) {
-      this.state = JSON.parse(cachedState);
+      const parsedCachedState = JSON.parse(cachedState);
+
+      this.state = {
+        tasks: parsedCachedState.tasks,
+        rowWithNewTask: 0,
+      };
     } else {
       this.state = {
         tasks: [],
+        rowWithNewTask: 0,
       };
     }
   }
@@ -51,13 +57,17 @@ class Kanban extends Component {
     let tasks = this.state.tasks.slice();
 
     const task = tasks.find(item => item.id === id);
-    /*    if (task.taskState >= 3 || task.taskState <= 1) return; */
     tasks = tasks.filter(item => item.id !== id);
     task.taskState += dir === 'next' ? 1 : -1;
 
     tasks.push(task);
     this.setState({
       tasks,
+      rowWithNewTask: task.taskState,
+    }, () => {
+      this.setState({
+        rowWithNewTask: 0,
+      });
     });
   };
 
@@ -85,8 +95,9 @@ class Kanban extends Component {
     body.value = '';
     this.props.history.push('/');
   };
+
   render() {
-    const { tasks } = this.state;
+    const { tasks, rowWithNewTask } = this.state;
 
     return (
       <>
@@ -98,6 +109,7 @@ class Kanban extends Component {
               tasks={tasks.sort((a, b) => b.priority - a.priority)}
               onTaskMove={this.handleTaskState}
               onTaskDelete={this.handleTaskDelete}
+              rowWithNewTask={rowWithNewTask}
             />
           )}
         />
