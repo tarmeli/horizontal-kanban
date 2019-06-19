@@ -21,7 +21,7 @@
     background-color: transparent;
     border: 0;
 
-    &:hover {
+    @include hover-supported() {
       color: $white;
       background-color: $gray;
     }
