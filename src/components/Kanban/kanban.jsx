@@ -9,13 +9,9 @@ const Kanban = ({
     tasks={tasks.sort((a, b) => b.priority - a.priority)}
     onTaskMove={handleTaskState}
     onTaskDelete={handleTaskDelete}
-    {...rowWithNewTask}
+    rowWithNewTask={rowWithNewTask}
   />
 );
-
-Kanban.defaultProps = {
-  rowWithNewTask: 0,
-};
 
 Kanban.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
@@ -27,10 +23,9 @@ Kanban.propTypes = {
     created: PropTypes.string.isRequired,
     deadline: PropTypes.string,
   })).isRequired,
-  setTasks: PropTypes.func.isRequired,
   handleTaskDelete: PropTypes.func.isRequired,
   handleTaskState: PropTypes.func.isRequired,
-  rowWithNewTask: PropTypes.number,
+  rowWithNewTask: PropTypes.number.isRequired,
 };
 
 export { Kanban };

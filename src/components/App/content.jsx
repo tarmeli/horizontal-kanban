@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 
 const Content = () => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
-  const [rowWithNewTask, setRowWithNewTask] = useState('');
+  const [rowWithNewTask, setRowWithNewTask] = useState(0);
 
   const handleTaskDelete = (e) => {
     e.preventDefault();
@@ -28,7 +28,10 @@ const Content = () => {
     newTasks.push(task);
     setTasks(newTasks);
     setRowWithNewTask(task.taskState);
-    setRowWithNewTask(0);
+
+    setTimeout(() => {
+      setRowWithNewTask(0);
+    }, 1);
   };
 
   const handleSubmitTask = (e) => {
@@ -63,7 +66,7 @@ const Content = () => {
           <Kanban
             tasks={tasks}
             setTasks={setTasks}
-            {...rowWithNewTask}
+            rowWithNewTask={rowWithNewTask}
             handleTaskDelete={handleTaskDelete}
             handleTaskState={handleTaskState}
 

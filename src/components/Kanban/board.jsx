@@ -23,10 +23,6 @@ const Board = ({
   </div>
 );
 
-Board.defaultProps = {
-  rowWithNewTask: null,
-};
-
 Board.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -37,7 +33,7 @@ Board.propTypes = {
     created: PropTypes.string.isRequired,
     deadline: PropTypes.string,
   })).isRequired,
-  rowWithNewTask: PropTypes.number,
+  rowWithNewTask: PropTypes.number.isRequired,
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
 };
