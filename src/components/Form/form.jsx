@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Add = ({ onSubmitTask }) => (
+const Form = ({ onSubmitTask }) => (
   <div className="form">
-    <h1>Add a Task</h1>
+    <h1>Add a new task</h1>
     <form onSubmit={onSubmitTask}>
       <input
         placeholder="Task Name*"
@@ -47,17 +47,19 @@ const Add = ({ onSubmitTask }) => (
         id="body"
         required
       />
+
       <input className="button button--wide" type="submit" value="Submit" />
 
       <div className="form__required-text">
         * required field
       </div>
+
     </form>
   </div>
 );
 
-Add.propTypes = {
+Form.propTypes = {
   onSubmitTask: PropTypes.func.isRequired,
 };
 
-export { Add };
+export { Form };
