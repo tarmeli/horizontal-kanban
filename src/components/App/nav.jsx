@@ -1,30 +1,19 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
-import { NavItem } from './';
+import { NavLink } from 'react-router-dom';
+import React from 'react';
 
-const Nav = () => {
-  const [activeButton, setActiveButton] = useState('tasks');
+const Nav = () => (
+  <div className="container container__navbar">
+    <nav className="navbar">
+      <NavLink exact to="/" className="navbar__item" activeClassName="navbar__item--active">
+          tasks
+      </NavLink>
 
-  return (
-    <div className="container container__navbar">
-      <nav className="navbar">
-        <Link to="/">
-          <NavItem
-            title="tasks"
-            isActive={activeButton === 'tasks'}
-            handleClick={() => setActiveButton('tasks')}
-          />
-        </Link>
-        <Link to="/Add">
-          <NavItem
-            title="add"
-            isActive={activeButton === 'add'}
-            handleClick={() => setActiveButton('add')}
-          />
-        </Link>
-      </nav>
-    </div>
-  );
-};
+      <NavLink to="/add-new-task" className="navbar__item" activeClassName="navbar__item--active">
+          new task
+      </NavLink>
+
+    </nav>
+  </div>
+);
 
 export { Nav };

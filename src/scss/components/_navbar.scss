@@ -22,7 +22,6 @@
     border: 0;
 
     @include hover-supported() {
-      color: $white;
       background-color: $gray;
     }
 
@@ -37,6 +36,11 @@
       border-right: 1px;
       border-style: solid;
       border-color: $gray;
+
+      @include hover-supported() {
+        background-color: #f8f8f8;
+        color: $black;
+      } 
     }
   }
 }
