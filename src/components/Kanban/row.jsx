@@ -18,8 +18,8 @@ const Row = ({
   }, [hasNewTask]);
 
   return (
-    <div className={`board-list__row${isNewTaskFlashActive ? ' board-list__row--new-task-flash' : ''}`}>
-      <h2 className="board-list__title">{rowTitle}</h2>
+    <div className={`board-list__row ${isNewTaskFlashActive ? 'board-list__row--new-task-flash' : ''}`}>
+      <div className="board-list__title"><h2>{rowTitle}</h2></div>
       <div className="board-list__task-view">
         {tasks.map(task => (
           <Task

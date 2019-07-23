@@ -77,6 +77,7 @@ const Task = ({
           >
             <FontAwesomeIcon icon={faArrowUp} />
           </span>
+
           <span
             className="task__del task__footer-button"
             onClick={onTaskDelete}
@@ -86,6 +87,7 @@ const Task = ({
           >
             <FontAwesomeIcon icon={faTrash} />
           </span>
+
           <span
             className="task__next task__footer-button"
             data-dir="next"
