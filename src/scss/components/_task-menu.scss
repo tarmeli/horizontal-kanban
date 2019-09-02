@@ -44,6 +44,16 @@
     &--active {
       background-color: rgba(124, 123, 123, 0.996);
       color: white;
+
+      span {
+        &:nth-child(2) {
+          transform: rotate(45deg) !important;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(-45deg) !important;
+        }
+      }
     }
 
     &--dropdown {
