@@ -9,20 +9,20 @@ const Content = () => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
 
-  const handleTaskDelete = (e) => {
+  const handleTaskDelete = (e, id) => {
     e.preventDefault();
-    const id = parseInt(e.target.parentNode.parentNode.parentNode.id, 10);
-    setTasks(tasks.slice().filter(task => task.id !== id));
+    const taskToBeRemoved = tasks.slice().filter(task => task.id !== id);
+
+    setTasks(taskToBeRemoved);
   };
 
-  const handleTaskState = (e) => {
+  const handleTaskState = (e, rowId, taskId) => {
     e.preventDefault();
-    const { dir } = e.target.dataset;
-    const id = parseInt(e.target.parentNode.parentNode.parentNode.id, 10);
+
     const tasksArray = tasks.slice();
-    const taskToAdd = tasksArray.find(task => task.id === id);
-    const filteredTasks = tasksArray.filter(task => task.id !== id);
-    taskToAdd.taskState += dir === 'next' ? 1 : -1;
+    const taskToAdd = tasksArray.find(task => task.id === taskId);
+    const filteredTasks = tasksArray.filter(task => task.id !== taskId);
+    taskToAdd.taskState = rowId;
 
     setTasks([...filteredTasks, taskToAdd]);
     setRowWithNewTask(taskToAdd.taskState);
@@ -34,6 +34,7 @@ const Content = () => {
 
   const handleSubmitTask = (e) => {
     e.preventDefault();
+
     const {
       name, body, priority, deadline,
     } = e.target;
@@ -72,7 +73,8 @@ const Content = () => {
             rowWithNewTask={rowWithNewTask}
             handleTaskDelete={handleTaskDelete}
             handleTaskState={handleTaskState}
-          />)}
+          />)
+        }
       />
 
       <Route
@@ -80,7 +82,8 @@ const Content = () => {
         render={() => (
           <Form
             onSubmitTask={handleSubmitTask}
-          />)}
+          />)
+        }
       />
 
     </div>

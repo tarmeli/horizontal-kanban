@@ -1,6 +1,6 @@
 const boardData = [
   {
-    title: 'todo',
+    title: 'backlog',
     id: 1,
   },
   {

@@ -9,6 +9,7 @@ const Form = ({ onSubmitTask }) => (
       {formData.map(input => (
         <Input
           {...input}
+          key={input.id}
         />
       ))}
       <div className="form__required-text">

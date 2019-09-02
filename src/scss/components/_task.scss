@@ -7,6 +7,7 @@
   width: 250px;
   min-width: 250px;
   background-color: #fcfcfcfe;
+  transition: all 0.2s;
 
   .svg-inline--fa {
     pointer-events: none;
@@ -122,11 +123,8 @@
 
       &--left, &--right {
         width: 25%;
-        display: inherit;
         font-size: 12px;
-        margin-top: 15px;
-        flex-direction: column;
-        height: 100%;
+        position: relative;
 
         &-top {
           padding: 2px;

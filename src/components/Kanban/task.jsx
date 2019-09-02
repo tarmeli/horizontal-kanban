@@ -1,25 +1,21 @@
-import { faBug, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faBug } from '@fortawesome/free-solid-svg-icons';
+import { TaskMenu } from './';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 const Task = ({
-  task, onTaskMove, onTaskDelete, amountOfRows,
+  task,
+  onTaskDelete,
+  onTaskMove,
 }) => {
   const [expanded, setExpanded] = useState(false);
-
-  const onPrevClick = (e) => {
-    (() => (task.taskState <= 1 ? null : onTaskMove(e)))();
-  };
-
-  const onNextClick = (e) => {
-    (() => (task.taskState >= amountOfRows ? null : onTaskMove(e)))();
-  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div
-      className={`task${task.deadline ? '' : ' task--normal'}${expanded ? ' task--expanded' : ''}`}
+      className={`task ${task.deadline ? '' : 'task--normal'} ${expanded ? 'task--expanded' : ''}`}
       id={task.id}
     >
       <div className="task__header" data-priority={task.priority}>
@@ -44,11 +40,13 @@ const Task = ({
 
           <div className="task__header-sub--right">
             <div className="task__header-sub--right-top">
-              {task.priority}
-            </div>
-
-            <div className="task__header-sub--right-bottom">
-              <FontAwesomeIcon icon={faBug} />
+              <TaskMenu
+                isMenuOpen={isMenuOpen}
+                setIsMenuOpen={setIsMenuOpen}
+                onTaskDelete={onTaskDelete}
+                onTaskMove={onTaskMove}
+                taskID={task.id}
+              />
             </div>
           </div>
         </div>
@@ -65,41 +63,6 @@ const Task = ({
             DL {new Date(task.deadline).toLocaleDateString('fi-FI')}
           </div>
         ) : null}
-        <div className="task__footer-button-group">
-          <span
-            className="task__prev task__footer-button"
-            data-dir="prev"
-            disabled={task.taskState <= 1}
-            onClick={onPrevClick}
-            onKeyDown={onPrevClick}
-            role="button"
-            tabIndex={task.id}
-          >
-            <FontAwesomeIcon icon={faArrowUp} />
-          </span>
-
-          <span
-            className="task__del task__footer-button"
-            onClick={onTaskDelete}
-            onKeyDown={onTaskMove}
-            role="button"
-            tabIndex={task.id}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </span>
-
-          <span
-            className="task__next task__footer-button"
-            data-dir="next"
-            onClick={onNextClick}
-            disabled={task.taskState >= amountOfRows}
-            onKeyDown={onNextClick}
-            role="button"
-            tabIndex={task.id}
-          >
-            <FontAwesomeIcon icon={faArrowDown} />
-          </span>
-        </div>
       </div>
     </div>
   );
@@ -115,9 +78,8 @@ Task.propTypes = {
     created: PropTypes.string.isRequired,
     deadline: PropTypes.string,
   }).isRequired,
-  onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
-  amountOfRows: PropTypes.number.isRequired,
+  onTaskMove: PropTypes.func.isRequired,
 };
 
 export { Task };

@@ -11,7 +11,6 @@ const Input = ({
   onFocus,
   onBlur,
   inputType,
-  value,
 }) => (
   inputType === 'textarea' ?
     <textarea
@@ -23,7 +22,6 @@ const Input = ({
       placeholder={placeholder}
       onFocus={onFocus}
       onBlur={onBlur}
-      value={value}
     />
     :
     <input
@@ -35,15 +33,13 @@ const Input = ({
       placeholder={placeholder}
       onFocus={onFocus}
       onBlur={onBlur}
-      value={value}
     />
 );
 
 Input.defaultProps = {
-  placeholder: null,
+  placeholder: '',
   onFocus: null,
   onBlur: null,
-  value: null,
 };
 
 Input.propTypes = {
@@ -56,7 +52,6 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  value: PropTypes.string,
 };
 
 export { Input };

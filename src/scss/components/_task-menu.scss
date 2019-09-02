@@ -1,0 +1,143 @@
+.task-menu {
+  list-style-type: none;
+  position: absolute;
+  border-radius: 5px;
+  top: 27px;
+  right: 10px;
+  width: 217px;
+  background-color: #ddddddfe;
+  max-height: 192px;
+  overflow: auto;
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__button {
+    position: relative;
+
+    &:first-child {
+      border-radius: 5px 5px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 5px 5px;
+    }
+
+    input[type="button"] {
+      background-color: transparent;
+      width: 100%;
+      font-size: 15px;
+      padding: 1em;
+      cursor: pointer;
+      border: 0;
+      text-align: left;
+      outline: none;
+      color: $black;
+    }
+
+    &:hover {
+      background-color: #b4b4b4fe;
+    }
+
+    &--active {
+      background-color: rgba(124, 123, 123, 0.996);
+      color: white;
+    }
+
+    &--dropdown {
+      span {
+        position: absolute;
+        width: 8px;
+        height: 2px;
+        background: black;
+        border-radius: 2px;
+        overflow: hidden;
+        transition: all 0.2s linear;
+        pointer-events: none;
+        top: 24px;
+  
+        &::before {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 100%;
+          top: 0;
+          right: 0;
+          background: black;
+        }
+
+        &:nth-child(2) {
+          transform: rotate(-45deg);
+          right: 20px;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(45deg);
+          right: 24px;
+        }
+      }
+    }
+
+    &--delete {
+      input[type="button"] {
+        color: red;
+      }
+    }
+  }
+
+  &__toggle {
+    transform: rotate(90deg);
+    cursor: pointer;
+    height: 40px;
+    width: 23px;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+    border-radius: 5px;
+    position: relative;
+    top: -12px;
+    right: -10px;
+  
+    &:after {
+      content: '\2807';
+      font-size: 25px;
+    }
+
+    &:active {
+      background-color: $scorpion;
+    }
+
+    @include hover-supported() {
+      background-color: $gray;
+    }
+
+    &--active {
+      background-color: $link;
+    }
+  }
+
+  .sub-menu {
+    background-color: white;
+    list-style-type: none;
+
+    input[type="button"] {
+      background-color: transparent;
+      width: 100%;
+      font-size: 13px;
+      padding: 1em;
+      cursor: pointer;
+      border: 0;
+      text-align: left;
+      outline: none;
+      color: $black;
+      text-transform: capitalize;
+      padding-left: 30px;
+
+      &:hover {
+        background-color: #ddddddfe;
+      }
+    }
+  }
+}

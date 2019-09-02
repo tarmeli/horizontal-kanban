@@ -16,25 +16,26 @@
     border-style: solid;
     border-radius: 5px;
     background-color: $white;
-    transition: all;
-
-    &--new-task-flash {
-      border-right:11px solid #2ece31;
-    }
+    transition: border-right 0.1s;
   }
 
-  &__title > h2 {
+  &__title {
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    min-width: 47px;
+    border-radius: 5px;
+
+    h2 {
     transform: rotate(180deg);
     writing-mode: vertical-lr;
     font-size: 20px;
     padding: 0.5rem;
-    height: 100%;
     margin: 0 2px 0 0;
     color: $white;
+    flex-grow: 1;
     background-color: $scorpion;
-    border-radius: 5px;
-    width: 43px;
-    min-width: 43px;
+    }
   }
 
   &__task-view {
