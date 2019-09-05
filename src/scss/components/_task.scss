@@ -1,5 +1,5 @@
 .task {
-  margin: 0 2px 0 2px; 
+  margin: 2px;
   border-radius: 5px;
   padding: 0 10px;
   display: flex;
@@ -8,6 +8,7 @@
   min-width: 250px;
   background-color: #fcfcfcfe;
   transition: all 0.2s;
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
 
   .svg-inline--fa {
     pointer-events: none;
@@ -185,8 +186,6 @@
     text-align: center;
 
     &--deadline {
-      background-color: $scorpion;
-      color: $white;
       font-size: 11px;
       margin: 0 -1px;
       padding: 10px 0;

@@ -6,9 +6,10 @@
   right: 10px;
   width: 217px;
   background-color: #ddddddfe;
-  max-height: 192px;
+  max-height: 180px;
   overflow: auto;
   box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
+  transition: all 0.2s;
 
   &::-webkit-scrollbar {
     display: none;
@@ -35,6 +36,7 @@
       text-align: left;
       outline: none;
       color: $black;
+      transition: all 0.2s;
     }
 
     &:hover {
@@ -43,7 +45,11 @@
 
     &--active {
       background-color: rgba(124, 123, 123, 0.996);
+
+      input[type="button"] {
+
       color: white;
+      }
 
       span {
         &:nth-child(2) {
