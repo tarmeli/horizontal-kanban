@@ -1,5 +1,6 @@
 import { Kanban } from '../Kanban';
 import { Form } from '../Form';
+import { newTaskFormData, loginFormData, registerFormData } from '../../data';
 import { useLocalStorage } from '../../hooks';
 
 import React, { useState } from 'react';
@@ -8,6 +9,7 @@ import { Route } from 'react-router-dom';
 const Content = () => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleTaskDelete = (e, id) => {
     e.preventDefault();
@@ -61,29 +63,67 @@ const Content = () => {
     setTasks(newTasks);
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log('login event!');
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log('register event!');
+  };
+
   return (
     <div className="container">
       <Route
         exact
         path="/"
         render={() => (
-          <Kanban
-            tasks={tasks}
-            setTasks={setTasks}
-            rowWithNewTask={rowWithNewTask}
-            handleTaskDelete={handleTaskDelete}
-            handleTaskState={handleTaskState}
-          />)
-        }
+          isLoggedIn ?
+            <Kanban
+              tasks={tasks}
+              setTasks={setTasks}
+              rowWithNewTask={rowWithNewTask}
+              handleTaskDelete={handleTaskDelete}
+              handleTaskState={handleTaskState}
+            /> : <Form
+              onSubmit={handleLogin}
+              data={loginFormData}
+            />)}
       />
 
       <Route
         path="/add-new-task"
         render={() => (
-          <Form
-            onSubmitTask={handleSubmitTask}
-          />)
+          isLoggedIn ?
+            <Form
+              onSubmit={handleSubmitTask}
+              data={newTaskFormData}
+            /> : <Form
+              onSubmit={handleLogin}
+              data={loginFormData}
+            />)
         }
+      />
+
+      <Route
+        path="/login"
+        render={() => (
+          <Form
+            onSubmit={handleLogin}
+            data={loginFormData}
+          />
+        )}
+      />
+
+      <Route
+        path="/register"
+        render={() => (
+          <Form
+            onSubmit={handleRegister}
+            data={registerFormData}
+          />
+        )}
       />
 
     </div>

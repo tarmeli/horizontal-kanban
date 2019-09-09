@@ -12,6 +12,14 @@ const Nav = () => (
           new task
       </NavLink>
 
+      <NavLink to="/login" className="navbar__item" activeClassName="navbar__item--active">
+          login
+      </NavLink>
+
+      <NavLink to="/register" className="navbar__item" activeClassName="navbar__item--active">
+          register
+      </NavLink>
+
     </nav>
   </div>
 );
