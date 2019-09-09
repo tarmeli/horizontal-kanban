@@ -1,27 +1,44 @@
 .form {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &__container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    flex-direction: column;
+  }
+
+  h1 {
+    width: 100%;
+    text-align: left;
+  }
 
   &__control {
     width: 100%;
     font-size: 1rem;
     padding: 0.5em;
     outline: 0;
-    border: 1px solid &black;
+    border: 1px solid $black;
     border-color: $gray;
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
-    box-shadow: 0;
+    box-shadow: none;
     margin: 0 0 5px 0;
 
     &--text {
       height: 2rem;
       padding: 1em 0.5em;
+      width: 500px
     }
 
     &--textarea {
       height: 7.5em;
       resize: vertical;
+      width: 750px;
     }
   }
 
