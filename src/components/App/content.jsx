@@ -2,14 +2,18 @@ import { Kanban } from '../Kanban';
 import { Form } from '../Form';
 import { newTaskFormData, loginFormData, registerFormData } from '../../data';
 import { useLocalStorage } from '../../hooks';
+import { LOGIN_MUTATION, SIGNUP_MUTATION } from '../../data/constants';
 
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
 
 const Content = () => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [login] = useMutation(LOGIN_MUTATION);
+  const [signup] = useMutation(SIGNUP_MUTATION);
 
   const handleTaskDelete = (e, id) => {
     e.preventDefault();
@@ -63,14 +67,30 @@ const Content = () => {
     setTasks(newTasks);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('login event!');
+
+    const { email, password } = e.target;
+    const logindata = await login({ variables: { email: email.value, password: password.value } });
+
+    if (logindata) {
+      // handle cookies
+      setIsLoggedIn(true);
+      console.log('token', logindata.data.login.token);
+    }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    console.log('register event!');
+
+    const { name, email, password } = e.target;
+    const signupdata = await signup({ variables: { name: name.value, email: email.value, password: password.value } });
+
+    if (signupdata) {
+      // handle cookies
+      setIsLoggedIn(true);
+      console.log('token', signupdata.data.signup.token);
+    }
   };
 
   return (
