@@ -11,33 +11,51 @@ const Input = ({
   onFocus,
   onBlur,
   inputType,
-}) => (
-  inputType === 'textarea' ?
-    <textarea
-      className={className}
-      type={type}
-      name={name}
-      id={id}
-      required={required}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-    />
-    :
-    <input
-      className={className}
-      type={type}
-      name={name}
-      id={id}
-      required={required}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-    />
-);
+  value,
+}) => {
+  switch (inputType) {
+    case 'textarea':
+      return (<textarea
+        className={className}
+        type={type}
+        name={name}
+        id={id}
+        required={required}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />);
+
+    case 'button':
+      return (<input
+        className={className}
+        type={type}
+        name={name}
+        id={id}
+        required={required}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        value={value}
+      />);
+
+    default:
+      return (<input
+        className={className}
+        type={type}
+        name={name}
+        id={id}
+        required={required}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />);
+  }
+};
 
 Input.defaultProps = {
   placeholder: '',
+  value: '',
   onFocus: null,
   onBlur: null,
 };
@@ -50,6 +68,7 @@ Input.propTypes = {
   required: PropTypes.bool.isRequired,
   inputType: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
 };

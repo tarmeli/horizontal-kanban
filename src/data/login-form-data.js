@@ -26,7 +26,7 @@ const loginFormData = {
       name: 'submit',
       id: 'submit',
       required: true,
-      inputType: 'input',
+      inputType: 'button',
       value: 'Login',
     },
   ],
