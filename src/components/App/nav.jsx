@@ -2,11 +2,11 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Nav = ({ isLoggedIn }) => (
+const Nav = ({ token }) => (
   <div className="container container__navbar">
     <nav className="navbar">
       {
-        isLoggedIn ?
+        token ?
           <>
             <NavLink exact to="/" className="navbar__item" activeClassName="navbar__item--active">
               tasks
@@ -16,7 +16,7 @@ const Nav = ({ isLoggedIn }) => (
               new task
             </NavLink>
 
-            <NavLink to="/logout" className="navbar__item" activeClassName="navbar__item--active">
+            <NavLink to="/logout" className="navbar__item">
               logout
             </NavLink>
           </>
@@ -35,8 +35,12 @@ const Nav = ({ isLoggedIn }) => (
   </div>
 );
 
+Nav.defaultProps = {
+  token: null,
+};
+
 Nav.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  token: PropTypes.string,
 };
 
 export { Nav };
