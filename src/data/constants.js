@@ -15,3 +15,16 @@ export const SIGNUP_MUTATION = gql`
     }
   }
 `;
+
+export const NEW_TASK_MUTATION = gql`
+  mutation NewTaskMutation($name: String!, $body: String!, $priority: String!, $deadline: DateTime) {
+    newTask(name: $name, body: $body, priority: $priority, deadline: $deadline) {
+      name
+      body
+      priority
+      deadline
+    }
+  }
+`;
+
+export const AUTH_TOKEN = 'token';
