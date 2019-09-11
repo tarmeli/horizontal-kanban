@@ -1,5 +1,5 @@
 import { Kanban, Logout } from '../Kanban';
-import { Form } from '../Form';
+import { Form } from '../Common/Form';
 import { newTaskFormData, loginFormData, registerFormData } from '../../data';
 import { useLocalStorage } from '../../hooks';
 
