@@ -1,5 +1,5 @@
 import { Content, Nav } from './';
-import { LOGIN_MUTATION, SIGNUP_MUTATION } from '../../data/constants';
+import { LOGIN_MUTATION, SIGNUP_MUTATION, NEW_TASK_MUTATION } from '../../data/constants';
 import { useLocalStorage } from '../../hooks/';
 import React, { useEffect } from 'react';
 
@@ -9,6 +9,7 @@ import { useMutation } from '@apollo/react-hooks';
 const App = () => {
   const [login] = useMutation(LOGIN_MUTATION);
   const [signup] = useMutation(SIGNUP_MUTATION);
+  const [newTask] = useMutation(NEW_TASK_MUTATION);
   const [token, setToken] = useLocalStorage('token', '');
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const App = () => {
         handleRegister={handleRegister}
         token={token}
         setToken={setToken}
+        newTask={newTask}
       />
     </div>
   );

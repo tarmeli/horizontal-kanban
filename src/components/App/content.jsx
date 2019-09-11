@@ -8,7 +8,7 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Content = ({
-  token, handleLogin, handleRegister, setToken,
+  token, handleLogin, handleRegister, setToken, newTask,
 }) => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
@@ -36,33 +36,24 @@ const Content = ({
     }, 1);
   };
 
-  const handleSubmitTask = (e) => {
+  const handleSubmitTask = async (e) => {
     e.preventDefault();
-
     const {
       name, body, priority, deadline,
     } = e.target;
 
-    const oldTasks = tasks.slice();
-    const id = oldTasks.sort((a, b) => b.id - a.id)[0];
-    const newTasks = [...oldTasks, {
-      id: oldTasks.length === 0 ? 1 : id.id + 1,
-      name: name.value,
-      body: body.value,
-      taskState: 1,
-      priority: parseInt(priority.value, 10),
-      created: new Date().toJSON(),
-      deadline:
-        deadline.value.length === 0 ? null : new Date(deadline.value).toJSON(),
-    }];
-
-    // empty the form fields
-    name.value = '';
-    body.value = '';
-    priority.value = null;
-    deadline.value = '';
-
-    setTasks(newTasks);
+    try {
+      await newTask({
+        variables: {
+          name: name.value,
+          body: body.value,
+          priority: priority.value,
+          deadline: deadline.value,
+        },
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   return (
@@ -138,6 +129,7 @@ Content.propTypes = {
   handleLogin: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
+  newTask: PropTypes.func.isRequired,
 };
 
 export { Content };
