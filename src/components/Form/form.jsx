@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Input, formData } from './';
+import { Input } from './';
 
-const Form = ({ onSubmitTask }) => (
-  <div className="form">
-    <h1>Add a new task</h1>
-    <form onSubmit={onSubmitTask}>
-      {formData.map(input => (
+const Form = ({ onSubmit, data }) => (
+  <div className="form__container">
+    <h1>{data.title}</h1>
+    <form className="form" onSubmit={onSubmit}>
+      {data.inputs.map(input => (
         <Input
           {...input}
           key={input.id}
@@ -20,7 +20,11 @@ const Form = ({ onSubmitTask }) => (
 );
 
 Form.propTypes = {
-  onSubmitTask: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    inputs: PropTypes.array.isRequired,
+  }).isRequired,
 };
 
 export { Form };
