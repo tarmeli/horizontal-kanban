@@ -8,8 +8,8 @@ const Logout = ({ setToken }) => {
   }, [setToken]);
 
   return (
-    <div>
-      <h2>logged out</h2>
+    <div className="logout logout__container">
+      <h2>You have been logged out</h2>
     </div>
   );
 };
