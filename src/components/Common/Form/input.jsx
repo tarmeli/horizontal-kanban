@@ -12,6 +12,7 @@ const Input = ({
   onBlur,
   inputType,
   value,
+  loading,
 }) => {
   switch (inputType) {
     case 'textarea':
@@ -27,17 +28,7 @@ const Input = ({
       />);
 
     case 'button':
-      return (<input
-        className={className}
-        type={type}
-        name={name}
-        id={id}
-        required={required}
-        placeholder={placeholder}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        value={value}
-      />);
+      return (<button className={loading ? [...className.split(' '), 'spinner'].join(' ') : className} type={type} name={name} id={id} disabled={loading} required={required}>{loading ? '' : value}</button>);
 
     default:
       return (<input
@@ -58,6 +49,7 @@ Input.defaultProps = {
   value: '',
   onFocus: null,
   onBlur: null,
+  loading: false,
 };
 
 Input.propTypes = {
@@ -71,6 +63,7 @@ Input.propTypes = {
   value: PropTypes.string,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export { Input };
