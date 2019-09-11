@@ -1,4 +1,4 @@
-import { Kanban } from '../Kanban';
+import { Kanban, Logout } from '../Kanban';
 import { Form } from '../Form';
 import { newTaskFormData, loginFormData, registerFormData } from '../../data';
 import { useLocalStorage } from '../../hooks';
@@ -7,7 +7,9 @@ import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Content = ({ isLoggedIn, handleLogin, handleRegister }) => {
+const Content = ({
+  token, handleLogin, handleRegister, setToken,
+}) => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
 
@@ -69,7 +71,7 @@ const Content = ({ isLoggedIn, handleLogin, handleRegister }) => {
         exact
         path="/"
         render={() => (
-          isLoggedIn ?
+          token ?
             <Kanban
               tasks={tasks}
               setTasks={setTasks}
@@ -85,7 +87,7 @@ const Content = ({ isLoggedIn, handleLogin, handleRegister }) => {
       <Route
         path="/add-new-task"
         render={() => (
-          isLoggedIn ?
+          token ?
             <Form
               onSubmit={handleSubmitTask}
               data={newTaskFormData}
@@ -116,14 +118,26 @@ const Content = ({ isLoggedIn, handleLogin, handleRegister }) => {
         )}
       />
 
+      <Route
+        path="/logout"
+        render={() => (
+          <Logout setToken={setToken} />
+        )}
+      />
+
     </div>
   );
 };
 
+Content.defaultProps = {
+  token: null,
+};
+
 Content.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  token: PropTypes.string,
   handleLogin: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
 };
 
 export { Content };
