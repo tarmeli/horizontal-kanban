@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { TASKS_QUERY } from '../../data/constants';
 
 const Content = ({
-  token, handleLogin, handleRegister, setToken, newTask,
+  token, handleLogin, handleRegister, setToken, newTask, moveTask,
 }) => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
@@ -21,20 +21,26 @@ const Content = ({
     setTasks(taskToBeRemoved);
   };
 
-  const handleTaskState = (e, rowId, taskId) => {
+  const handleTaskState = async (e, rowId, taskId) => {
     e.preventDefault();
 
-    const tasksArray = tasks.slice();
-    const taskToAdd = tasksArray.find(task => task.id === taskId);
-    const filteredTasks = tasksArray.filter(task => task.id !== taskId);
-    taskToAdd.taskState = rowId;
+    try {
+      const updatedTask = await moveTask({
+        variables: {
+          id: taskId,
+          taskState: rowId,
+        },
+        refetchQueries: [{ query: TASKS_QUERY }],
+      });
 
-    setTasks([...filteredTasks, taskToAdd]);
-    setRowWithNewTask(taskToAdd.taskState);
+      setRowWithNewTask(updatedTask.data.moveTask.taskState);
 
-    setTimeout(() => {
-      setRowWithNewTask(0);
-    }, 1);
+      setTimeout(() => {
+        setRowWithNewTask(0);
+      }, 1);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   const handleSubmitTask = async (e) => {
@@ -132,6 +138,7 @@ Content.propTypes = {
   handleRegister: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
   newTask: PropTypes.func.isRequired,
+  moveTask: PropTypes.func.isRequired,
 };
 
 export { Content };

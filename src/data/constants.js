@@ -27,6 +27,15 @@ export const NEW_TASK_MUTATION = gql`
   }
 `;
 
+export const MOVE_TASK_MUTATION = gql`
+  mutation MoveTaskMutation($id: ID!, $taskState: Int!) {
+    moveTask(id: $id, taskState: $taskState) {
+      id
+      taskState
+    }
+  } 
+`;
+
 export const TASKS_QUERY = gql`
   query TasksByIdQuery {
     tasksById {
@@ -39,6 +48,6 @@ export const TASKS_QUERY = gql`
       createdAt
     }
   }
-  `;
+`;
 
 export const AUTH_TOKEN = 'token';
