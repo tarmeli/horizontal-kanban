@@ -52,7 +52,7 @@ const Task = ({
         </div>
 
         <div className="task__date task__date--created">
-          {new Date(task.created).toLocaleDateString('fi-FI')}
+          {new Date(task.createdAt).toLocaleDateString('fi-FI')}
         </div>
       </div>
 
