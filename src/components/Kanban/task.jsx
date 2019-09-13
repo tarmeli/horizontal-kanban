@@ -70,12 +70,12 @@ const Task = ({
 
 Task.propTypes = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     body: PropTypes.string,
     taskState: PropTypes.number.isRequired,
-    priority: PropTypes.number.isRequired,
-    created: PropTypes.string.isRequired,
+    priority: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
     deadline: PropTypes.string,
   }).isRequired,
   onTaskDelete: PropTypes.func.isRequired,
