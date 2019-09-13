@@ -27,4 +27,18 @@ export const NEW_TASK_MUTATION = gql`
   }
 `;
 
+export const TASKS_QUERY = gql`
+  query TasksByIdQuery {
+    tasksById {
+      id
+      name
+      body
+      priority
+      deadline
+      taskState
+      createdAt
+    }
+  }
+  `;
+
 export const AUTH_TOKEN = 'token';
