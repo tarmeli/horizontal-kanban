@@ -49,7 +49,7 @@ const Content = ({
           name: name.value,
           body: body.value,
           priority: priority.value,
-          deadline: deadline.value,
+          deadline: deadline.value || undefined,
         },
         refetchQueries: [{ query: TASKS_QUERY }],
       });
