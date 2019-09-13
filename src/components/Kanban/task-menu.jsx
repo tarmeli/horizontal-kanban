@@ -34,7 +34,7 @@ TaskMenu.propTypes = {
   setIsMenuOpen: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
   onTaskMove: PropTypes.func.isRequired,
-  taskID: PropTypes.number.isRequired,
+  taskID: PropTypes.string.isRequired,
 };
 
 export { TaskMenu };
