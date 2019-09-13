@@ -6,6 +6,7 @@ import { useLocalStorage } from '../../hooks';
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { TASKS_QUERY } from '../../data/constants';
 
 const Content = ({
   token, handleLogin, handleRegister, setToken, newTask,
@@ -50,6 +51,7 @@ const Content = ({
           priority: priority.value,
           deadline: deadline.value,
         },
+        refetchQueries: [{ query: TASKS_QUERY }],
       });
     } catch (error) {
       console.log('error', error);
