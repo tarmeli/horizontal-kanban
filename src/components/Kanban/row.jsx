@@ -37,10 +37,6 @@ const Row = ({
   );
 };
 
-Row.defaultProps = {
-  loading: true,
-};
-
 Row.propTypes = {
   rowTitle: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.shape({
@@ -56,7 +52,7 @@ Row.propTypes = {
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
   amountOfRows: PropTypes.number.isRequired,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool.isRequired,
 };
 
 export { Row };
