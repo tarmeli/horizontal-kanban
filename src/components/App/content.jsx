@@ -9,16 +9,24 @@ import PropTypes from 'prop-types';
 import { TASKS_QUERY } from '../../data/constants';
 
 const Content = ({
-  token, handleLogin, handleRegister, setToken, newTask, moveTask,
+  token, handleLogin, handleRegister, setToken, newTask, moveTask, deleteTask,
 }) => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
 
-  const handleTaskDelete = (e, id) => {
+  const handleTaskDelete = async (e, id) => {
     e.preventDefault();
-    const taskToBeRemoved = tasks.slice().filter(task => task.id !== id);
 
-    setTasks(taskToBeRemoved);
+    try {
+      await deleteTask({
+        variables: {
+          id,
+        },
+        refetchQueries: [{ query: TASKS_QUERY }],
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   const handleTaskState = async (e, rowId, taskId) => {
@@ -139,6 +147,7 @@ Content.propTypes = {
   setToken: PropTypes.func.isRequired,
   newTask: PropTypes.func.isRequired,
   moveTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 };
 
 export { Content };
