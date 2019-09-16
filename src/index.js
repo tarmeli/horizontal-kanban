@@ -13,7 +13,7 @@ import { setContext } from 'apollo-link-context';
 import { AUTH_TOKEN } from './data/constants';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
+  uri: 'https://horka-backend.herokuapp.com/',
 });
 
 const authLink = setContext((_, { headers }) => {
