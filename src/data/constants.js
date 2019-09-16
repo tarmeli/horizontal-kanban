@@ -50,4 +50,12 @@ export const TASKS_QUERY = gql`
   }
 `;
 
+export const DELETE_TASK_MUTATION = gql`
+  mutation DeleteTaskMutation($id: ID!) {
+    deleteTask(id: $id) {
+      id
+    }
+  }
+`;
+
 export const AUTH_TOKEN = 'token';
