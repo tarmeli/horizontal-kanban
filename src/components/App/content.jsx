@@ -1,64 +1,80 @@
-import { Kanban } from '../Kanban';
-import { Form } from '../Form';
+import { Kanban, Logout } from '../Kanban';
+import { Form } from '../Common/Form';
+import { newTaskFormData, loginFormData, registerFormData } from '../../data';
 import { useLocalStorage } from '../../hooks';
 
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { TASKS_QUERY } from '../../data/constants';
 
-const Content = () => {
+const Content = ({
+  token, handleLogin, handleRegister, setToken, newTask, moveTask, deleteTask,
+}) => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  const handleTaskDelete = (e, id) => {
+  const handleTaskDelete = async (e, id) => {
     e.preventDefault();
-    const taskToBeRemoved = tasks.slice().filter(task => task.id !== id);
 
-    setTasks(taskToBeRemoved);
+    try {
+      await deleteTask({
+        variables: {
+          id,
+        },
+        refetchQueries: [{ query: TASKS_QUERY }],
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
-  const handleTaskState = (e, rowId, taskId) => {
+  const handleTaskState = async (e, rowId, taskId) => {
     e.preventDefault();
 
-    const tasksArray = tasks.slice();
-    const taskToAdd = tasksArray.find(task => task.id === taskId);
-    const filteredTasks = tasksArray.filter(task => task.id !== taskId);
-    taskToAdd.taskState = rowId;
+    try {
+      const updatedTask = await moveTask({
+        variables: {
+          id: taskId,
+          taskState: rowId,
+        },
+        refetchQueries: [{ query: TASKS_QUERY }],
+      });
 
-    setTasks([...filteredTasks, taskToAdd]);
-    setRowWithNewTask(taskToAdd.taskState);
+      setRowWithNewTask(updatedTask.data.moveTask.taskState);
 
-    setTimeout(() => {
-      setRowWithNewTask(0);
-    }, 1);
+      setTimeout(() => {
+        setRowWithNewTask(0);
+      }, 1);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
-  const handleSubmitTask = (e) => {
+  const handleSubmitTask = async (e) => {
     e.preventDefault();
-
     const {
       name, body, priority, deadline,
     } = e.target;
 
-    const oldTasks = tasks.slice();
-    const id = oldTasks.sort((a, b) => b.id - a.id)[0];
-    const newTasks = [...oldTasks, {
-      id: oldTasks.length === 0 ? 1 : id.id + 1,
-      name: name.value,
-      body: body.value,
-      taskState: 1,
-      priority: parseInt(priority.value, 10),
-      created: new Date().toJSON(),
-      deadline:
-        deadline.value.length === 0 ? null : new Date(deadline.value).toJSON(),
-    }];
-
-    // empty the form fields
-    name.value = '';
-    body.value = '';
-    priority.value = null;
-    deadline.value = '';
-
-    setTasks(newTasks);
+    try {
+      setLoading(true);
+      await newTask({
+        variables: {
+          name: name.value,
+          body: body.value,
+          priority: priority.value,
+          deadline: deadline.value || undefined,
+        },
+        refetchQueries: [{ query: TASKS_QUERY }],
+      });
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      window.location = '/';
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,27 +83,81 @@ const Content = () => {
         exact
         path="/"
         render={() => (
-          <Kanban
-            tasks={tasks}
-            setTasks={setTasks}
-            rowWithNewTask={rowWithNewTask}
-            handleTaskDelete={handleTaskDelete}
-            handleTaskState={handleTaskState}
-          />)
-        }
+          token ?
+            <Kanban
+              tasks={tasks}
+              setTasks={setTasks}
+              rowWithNewTask={rowWithNewTask}
+              handleTaskDelete={handleTaskDelete}
+              handleTaskState={handleTaskState}
+            /> : <Form
+              loading={loading}
+              onSubmit={handleLogin}
+              data={loginFormData}
+            />)}
       />
 
       <Route
         path="/add-new-task"
         render={() => (
-          <Form
-            onSubmitTask={handleSubmitTask}
-          />)
+          token ?
+            <Form
+              onSubmit={handleSubmitTask}
+              data={newTaskFormData}
+              loading={loading}
+            /> : <Form
+              loading={loading}
+              onSubmit={handleLogin}
+              data={loginFormData}
+            />)
         }
+      />
+
+      <Route
+        path="/login"
+        render={() => (
+          <Form
+            loading={loading}
+            onSubmit={handleLogin}
+            data={loginFormData}
+          />
+        )}
+      />
+
+      <Route
+        path="/register"
+        render={() => (
+          <Form
+            loading={loading}
+            onSubmit={handleRegister}
+            data={registerFormData}
+          />
+        )}
+      />
+
+      <Route
+        path="/logout"
+        render={() => (
+          <Logout setToken={setToken} />
+        )}
       />
 
     </div>
   );
+};
+
+Content.defaultProps = {
+  token: null,
+};
+
+Content.propTypes = {
+  token: PropTypes.string,
+  handleLogin: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
+  newTask: PropTypes.func.isRequired,
+  moveTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 };
 
 export { Content };

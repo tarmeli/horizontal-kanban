@@ -23,4 +23,20 @@
   &--wide {
     width: 100%;
   }
+
+  &:disabled, &[disabled] {
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #fff;
+    }
+  }
+
+  &:hover {
+    background-color: $gray;
+  }
+
+  &:active {
+    background-color: $link;
+  }
 }

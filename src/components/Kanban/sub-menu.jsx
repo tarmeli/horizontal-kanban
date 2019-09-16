@@ -20,7 +20,7 @@ SubMenu.propTypes = {
     id: PropTypes.number,
   })).isRequired,
   action: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export { SubMenu };
