@@ -9,6 +9,44 @@
   }
 }
 
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #000;
+  animation: spinner .6s linear infinite;
+}
+
+@keyframes loader {
+	0% {
+		background-position: 0% 50%;
+  }
+
+	50% {
+		background-position: 100% 50%;
+  }
+}
+
+.loader {
+  background-color: #fdfdfdfd!important;
+  animation: loader 2s infinite !important;
+  background: linear-gradient(90deg, #d6d6d6, #ebebeb, #d6d6d6) !important;
+  background-size: 600% 600% !important;
+}
+
+
 .right-border-flash {
   border-right: 10px solid #00ff04 !important;
 }

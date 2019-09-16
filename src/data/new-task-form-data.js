@@ -51,7 +51,7 @@ const newTaskFormData = {
       name: 'submit',
       id: 'submit',
       required: true,
-      inputType: 'input',
+      inputType: 'button',
       value: 'Submit',
     },
   ],

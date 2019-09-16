@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Board = ({
-  tasks, onTaskMove, onTaskDelete, rowWithNewTask,
+  tasks, onTaskMove, onTaskDelete, rowWithNewTask, error, loading,
 }) => (
   <div className="board">
     <div className="board-list">
-      {boardData.map(row => (
+      {error || boardData.map(row => (
         <Row
+          loading={loading}
           tasks={tasks.filter(task => task.taskState === row.id)}
           rowTitle={row.title}
           onTaskMove={onTaskMove}
@@ -23,16 +24,23 @@ const Board = ({
   </div>
 );
 
+Board.defaultProps = {
+  error: null,
+  tasks: [{}],
+};
+
 Board.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
     body: PropTypes.string,
-    taskState: PropTypes.number.isRequired,
-    priority: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    taskState: PropTypes.number,
+    priority: PropTypes.string,
+    createdAt: PropTypes.string,
     deadline: PropTypes.string,
-  })).isRequired,
+  })),
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
   rowWithNewTask: PropTypes.number.isRequired,
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,

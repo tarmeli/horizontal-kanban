@@ -9,11 +9,10 @@ const Kanban = ({
 }) => {
   const { loading, error, data } = useQuery(TASKS_QUERY);
 
-  if (loading) return <div>loading</div>;
-  if (error) return <div>error</div>;
-
   return (<Board
-    tasks={data.tasksById.sort((a, b) => b.priority - a.priority)}
+    loading={loading}
+    error={error}
+    tasks={loading ? [{}] : data.tasksById.sort((a, b) => b.priority - a.priority)}
     onTaskMove={handleTaskState}
     onTaskDelete={handleTaskDelete}
     rowWithNewTask={rowWithNewTask}

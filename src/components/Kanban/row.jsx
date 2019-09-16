@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Task } from './';
 
 const Row = ({
-  rowTitle, tasks, onTaskMove, onTaskDelete, hasNewTask, amountOfRows,
+  rowTitle, tasks, onTaskMove, onTaskDelete, hasNewTask, amountOfRows, loading,
 }) => {
   const [isNewTaskFlashActive, setIsNewTaskFlashActive] = useState(false);
 
@@ -18,7 +18,7 @@ const Row = ({
   }, [hasNewTask]);
 
   return (
-    <div className={`board-list__row ${isNewTaskFlashActive ? 'right-border-flash' : ''}`}>
+    <div className={`board-list__row ${isNewTaskFlashActive ? 'right-border-flash' : ''} ${loading ? 'loader' : ''}`}>
       <div className="board-list__title">
         <h2>{rowTitle}</h2>
       </div>
@@ -52,6 +52,7 @@ Row.propTypes = {
   onTaskMove: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
   amountOfRows: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export { Row };
