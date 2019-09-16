@@ -12,7 +12,7 @@ const Kanban = ({
   return (<Board
     loading={loading}
     error={error}
-    tasks={loading ? [{ loading: 'loading' }] : data.tasksById.sort((a, b) => b.priority - a.priority)}
+    tasks={loading ? [{}] : data.tasksById.sort((a, b) => b.priority - a.priority)}
     onTaskMove={handleTaskState}
     onTaskDelete={handleTaskDelete}
     rowWithNewTask={rowWithNewTask}

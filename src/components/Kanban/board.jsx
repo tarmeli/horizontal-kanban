@@ -31,6 +31,7 @@ Board.defaultProps = {
 
 Board.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     body: PropTypes.string,
     taskState: PropTypes.number,
