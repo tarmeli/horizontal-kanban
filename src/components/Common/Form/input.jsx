@@ -49,7 +49,6 @@ Input.defaultProps = {
   value: '',
   onFocus: null,
   onBlur: null,
-  loading: false,
 };
 
 Input.propTypes = {
@@ -63,7 +62,7 @@ Input.propTypes = {
   value: PropTypes.string,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool.isRequired,
 };
 
 export { Input };

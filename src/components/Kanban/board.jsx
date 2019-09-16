@@ -26,18 +26,18 @@ const Board = ({
 
 Board.defaultProps = {
   error: null,
+  tasks: [{}],
 };
 
 Board.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     body: PropTypes.string,
-    taskState: PropTypes.number.isRequired,
-    priority: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    taskState: PropTypes.number,
+    priority: PropTypes.string,
+    createdAt: PropTypes.string,
     deadline: PropTypes.string,
-  })).isRequired,
+  })),
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
   rowWithNewTask: PropTypes.number.isRequired,

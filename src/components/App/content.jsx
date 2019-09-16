@@ -13,6 +13,7 @@ const Content = ({
 }) => {
   const [tasks, setTasks] = useLocalStorage('kanbanstate', []);
   const [rowWithNewTask, setRowWithNewTask] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleTaskDelete = async (e, id) => {
     e.preventDefault();
@@ -58,6 +59,7 @@ const Content = ({
     } = e.target;
 
     try {
+      setLoading(true);
       await newTask({
         variables: {
           name: name.value,
@@ -69,6 +71,9 @@ const Content = ({
       });
     } catch (error) {
       console.log('error', error);
+    } finally {
+      window.location = '/';
+      setLoading(false);
     }
   };
 
@@ -86,6 +91,7 @@ const Content = ({
               handleTaskDelete={handleTaskDelete}
               handleTaskState={handleTaskState}
             /> : <Form
+              loading={loading}
               onSubmit={handleLogin}
               data={loginFormData}
             />)}
@@ -98,7 +104,9 @@ const Content = ({
             <Form
               onSubmit={handleSubmitTask}
               data={newTaskFormData}
+              loading={loading}
             /> : <Form
+              loading={loading}
               onSubmit={handleLogin}
               data={loginFormData}
             />)
@@ -109,6 +117,7 @@ const Content = ({
         path="/login"
         render={() => (
           <Form
+            loading={loading}
             onSubmit={handleLogin}
             data={loginFormData}
           />
@@ -119,6 +128,7 @@ const Content = ({
         path="/register"
         render={() => (
           <Form
+            loading={loading}
             onSubmit={handleRegister}
             data={registerFormData}
           />
